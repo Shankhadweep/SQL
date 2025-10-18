@@ -1,0 +1,395 @@
+SQL> --1. LIST ALL THE EMPLOYEES WHOSE COMMISSION IS NULL.
+SQL> select ename from emp where comm is null;
+
+ENAME
+----------
+SMITH
+JONES
+BLAKE
+CLARK
+SCOTT
+KING
+ADAMS
+JAMES
+FORD
+MILLER
+
+10 rows selected.
+
+SQL> --2. LIST ALL THE EMPLOYEES WHO DON’T HAVE A REPORTING MANAGER.
+select ename from emp where mgr is null;
+
+ENAME
+----------
+KING
+
+SQL> --3. LIST ALL THE SALESMEN IN DEPT 30.
+SQL> select ename from emp where job in ('SALESMAN');
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+WARD                                                                                                
+MARTIN                                                                                              
+TURNER                                                                                              
+
+SQL> select ename from emp where job in ('SALESMAN') and deptno in (30);
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+WARD                                                                                                
+MARTIN                                                                                              
+TURNER                                                                                              
+
+SQL> --4. LIST ALL THE SALESMEN IN DEPT NUMBER 30 AND HAVING SALARY GREATER THAN 1500.
+SQL> select ename from emp where job in ('SALESMAN') and deptno in (30) and sal > 1500;
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+
+SQL> --5. LIST ALL THE EMPLOYEES WHOSE NAME STARTS WITH `S' OR `A'.
+SQL> select ename from emp where ename like 'S%' and ename like 'A%';
+
+no rows selected
+
+SQL> select ename from emp where ename like 'S%' or ename like 'A%';
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+ALLEN                                                                                               
+SCOTT                                                                                               
+ADAMS                                                                                               
+
+SQL> --6. LIST ALL THE EMPLOYEES EXCEPT THOSE WHO ARE WORKING IN DEPT 10 & 20.
+SQL> select ename from emp where deptno not in (10,20);
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+WARD                                                                                                
+MARTIN                                                                                              
+BLAKE                                                                                               
+TURNER                                                                                              
+JAMES                                                                                               
+
+6 rows selected.
+
+SQL> --7. LIST THE EMPLOYEES WHOSE NAME DOES NOT START WITH `S'.
+SQL> select ename from emp where ename not like 'S%';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+WARD                                                                                                
+JONES                                                                                               
+MARTIN                                                                                              
+BLAKE                                                                                               
+CLARK                                                                                               
+KING                                                                                                
+TURNER                                                                                              
+ADAMS                                                                                               
+JAMES                                                                                               
+FORD                                                                                                
+MILLER                                                                                              
+
+12 rows selected.
+
+SQL> --8. LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGERS IN DEPT 10.
+ select ename from emp where mgr is not null and deptno in (10);
+
+ENAME
+----------
+CLARK
+MILLER
+SQL> --9. LIST ALL THE EMPLOYEES WHOSE COMMISSION IS NULL AND WORKING AS CLERK.
+SQL> select ename from emp where comm like null and job in ('CLERK');
+
+no rows selected
+
+SQL> select ename from emp where comm is null and job in ('CLERK');
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+ADAMS                                                                                               
+JAMES                                                                                               
+MILLER                                                                                              
+
+SQL> --10. LIST ALL THE EMPLOYEES WHO DON'T HAVE A REPORTING MANAGER IN DEPTNO 10 OR 30.
+SQL> select ename from emp where mgr is null and deptno in (10,30);
+
+ENAME                                                                                               
+----------                                                                                          
+KING                                                                                                
+
+SQL> --11. LIST ALL THE SALESMEN IN DEPT 30 WITH SAL MORE THAN 2450.
+SQL> select ename from emp where deptno in (30) and sal > 2450;
+
+ENAME                                                                                               
+----------                                                                                          
+BLAKE                                                                                               
+
+SQL> --12. LIST ALL THE ANALYST IN DEPT NUMBER 20 AND HAVING SALARY GREATER THAN 2500.
+SQL> select ename from emp where job in ('ANALYST') and deptno in (20) and sal > 2500;
+
+ENAME                                                                                               
+----------                                                                                          
+SCOTT                                                                                               
+FORD                                                                                                
+
+SQL> --13. LIST ALL THE EMPLOYEES WHOSE NAME STARTS WITH `M' OR `J'.
+
+SQL> select ename from emp where ename like 'M%' or ename like 'J%';
+
+ENAME                                                                                               
+----------                                                                                          
+JONES                                                                                               
+MARTIN                                                                                              
+JAMES                                                                                               
+MILLER                                                                                              
+
+SQL> --14. LIST ALL THE EMPLOYEES WITH ANNUAL SALARY EXCEPT THOSE WHO ARE WORKING IN DEPT 30.
+
+SQL> select ename, (sal*12) "ANNUAL_SAL" from emp where deptno not in (30);
+
+ENAME      ANNUAL_SAL                                                                               
+---------- ----------                                                                               
+SMITH            9600                                                                               
+JONES           35700                                                                               
+CLARK           29400                                                                               
+SCOTT           36000                                                                               
+KING            60000                                                                               
+ADAMS           13200                                                                               
+FORD            36000                                                                               
+MILLER          15600                                                                               
+
+8 rows selected.
+
+SQL> --15. LIST THE EMPLOYEES WHOSE NAME DOES NOT END WITH `ES' OR `R'.
+SQL> select ename from emp where ename not like '%ES' or ename not like '%R';
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+ALLEN                                                                                               
+WARD                                                                                                
+JONES                                                                                               
+MARTIN                                                                                              
+BLAKE                                                                                               
+CLARK                                                                                               
+SCOTT                                                                                               
+KING                                                                                                
+TURNER                                                                                              
+ADAMS                                                                                               
+JAMES                                                                                               
+FORD                                                                                                
+MILLER                                                                                              
+
+14 rows selected.
+
+SQL> select ename from emp where ename not like '%ES' and ename not like '%R';
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+ALLEN                                                                                               
+WARD                                                                                                
+MARTIN                                                                                              
+BLAKE                                                                                               
+CLARK                                                                                               
+SCOTT                                                                                               
+KING                                                                                                
+ADAMS                                                                                               
+FORD                                                                                                
+
+10 rows selected.
+
+SQL> --16. LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGERS IN DEPT 10 ALONG WITH 10% HIKE IN SALARY.
+SQL> select ename,((sal*0.1)+sal) "SAL_HIKE" from emp where mgr is not null and deptno in (10);
+
+ENAME        SAL_HIKE                                                                               
+---------- ----------                                                                               
+CLARK            2695                                                                               
+MILLER           1430                                                                               
+
+SQL> --17. DISPLAY ALL THE EMPLOYEE WHO ARE `SALESMAN'S HAVING `E' AS THE LAST BUT ONE CHARACTER IN ENAME BUT SALARY
+SQL> --HAVING EXACTLY 4 CHARACTER.
+SQL> select ename from emp where job in ('SALESMAN') and ename like '%E' and sal like '____';
+
+no rows selected
+
+SQL> select ename from emp where job in ('SALESMAN') and ename like '%E_' and sal like '____';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+TURNER                                                                                              
+
+SQL> --18. DISPLAY ALL THE EMPLOYEE WHO ARE JOINED AFTER YEAR 81.
+SQL> select ename from emp where TO_CHAR(hiredate,'YYYY') not in ('1981');
+
+ENAME                                                                                               
+----------                                                                                          
+SMITH                                                                                               
+SCOTT                                                                                               
+ADAMS                                                                                               
+MILLER                                                                                              
+
+SQL> --19. DISPLAY ALL THE EMPLOYEE WHO ARE JOINED IN FEB.
+SQL> select ename from emp where TO_CHAR(hiredate,'MON') in ('FEB');
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+WARD                                                                                                
+
+SQL> --20. LIST THE EMPLOYEES WHO ARE NOT WORKING AS MANAGERS AND CLERKS IN DEPT 10 AND 20 WITH A SALARY IN THE
+SQL> RANGE OF 1000 TO 3000.
+SP2-0734: unknown command beginning "RANGE OF 1..." - rest of line ignored.
+SQL> --20. LIST THE EMPLOYEES WHO ARE NOT WORKING AS MANAGERS AND CLERKS IN DEPT 10 AND 20 WITH A SALARY IN THE
+SQL> --RANGE OF 1000 TO 3000.
+SQL> select ename from emp where job not in ('MANAGERS','CLERKS') and deptno in (10,20) and sal between 1000 and 3000;
+
+ENAME                                                                                               
+----------                                                                                          
+JONES                                                                                               
+CLARK                                                                                               
+SCOTT                                                                                               
+ADAMS                                                                                               
+FORD                                                                                                
+MILLER                                                                                              
+
+6 rows selected.
+
+SQL> spool off;
+SQL> --21. LIST THE EMPLOYEES WHOSE SALARY NOT IN THE RANGE OF 1000 TO 2000 AND WORKING IN DEPT 10,20 OR 30 EXCEPT ALL SALESMEN.
+SQL> select ename from emp where sal between 1000 and 2000 and deptno in (10,20,30) and job not in ('SALESMAN');
+
+ENAME                                                                                               
+----------                                                                                          
+ADAMS                                                                                               
+MILLER                                                                                              
+
+SQL> --22. LIST THE DEPARTMENT NAMES WHICH ARE HAVING LETTER `O' IN THEIR LOCATIONS AS WELL AS THEIR DEPARTMENT NAMES.
+SQL> select dname from dept where loc like '%O%'and dname like '%O%';
+
+DNAME                                                                                               
+--------------                                                                                      
+ACCOUNTING                                                                                          
+OPERATIONS                                                                                          
+
+SQL> --23. DISPLAY ALL THE EMPLOYEES WHOSE JOB HAS STRING `MAN' IN
+SQL> select ename from emp where job in '%MAN%';
+
+no rows selected
+
+SQL> select ename from emp where job like '%MAN%';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+WARD                                                                                                
+JONES                                                                                               
+MARTIN                                                                                              
+BLAKE                                                                                               
+CLARK                                                                                               
+TURNER                                                                                              
+
+7 rows selected.
+
+SQL> --24. LIST THE EMPLOYEES WHO ARE HIRED AFTER 82 AND BEFORE 87.
+SQL> select ename from emp where hiredate > '%82' and hiredate < '%87';
+select ename from emp where hiredate > '%82' and hiredate < '%87'
+                                       *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+
+
+SQL> select ename from emp where hiredate between '%82' and '%87';
+select ename from emp where hiredate between '%82' and '%87'
+                                             *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+
+
+SQL> select ename from emp where TOC_CHAR(hiredate,'YY') between '82' and '87';
+select ename from emp where TOC_CHAR(hiredate,'YY') between '82' and '87'
+                            *
+ERROR at line 1:
+ORA-00904: "TOC_CHAR": invalid identifier 
+
+
+SQL> select ename from emp where TO_CHAR(hiredate,'YY') between '82' and '87';
+
+ENAME                                                                                               
+----------                                                                                          
+SCOTT                                                                                               
+ADAMS                                                                                               
+MILLER                                                                                              
+
+SQL> --25. WAQTD ALL THE DETAILS OF EMPLOYEES HIRED IN NOVEMBER AND DECEMBER.
+SQL> select * from emp where TO_CHAR(hiredate,'MON') between 'NOV' and 'DEC';
+
+no rows selected
+
+SQL> --26. LIST ALL THE EMPLOYEE NAMES AND COMISSION FOR THOSE EMPLOYEES WHO EARN COMISSION MORE THAN THEIR SALARY.
+SQL> select ename,comm from emp where comm > sal;
+
+ENAME            COMM                                                                               
+---------- ----------                                                                               
+MARTIN           1400                                                                               
+
+SQL> --27. WAQTD NAME AND DESIGNATION FOR ALL THE EMPLOYEES HAVING REPORTING MANAGERS AND ALSO THRIE NAMES STARTING WITH `S'.
+SQL> select ename,job from emp where mgr is not null and ename like 'S%';
+
+ENAME      JOB                                                                                      
+---------- ---------                                                                                
+SMITH      CLERK                                                                                    
+SCOTT      ANALYST                                                                                  
+
+SQL> --28. WAQTD NAME AND SALARY OF ALL THE EMPLOYEES IF THEIR ANNUAL SALARY ENDS WITH `0' .
+SQL> select ename,sal from emp where (sal*12) like '%0';
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+SMITH             800                                                                               
+ALLEN            1600                                                                               
+WARD             1250                                                                               
+JONES            2975                                                                               
+MARTIN           1250                                                                               
+BLAKE            2850                                                                               
+CLARK            2450                                                                               
+SCOTT            3000                                                                               
+KING             5000                                                                               
+TURNER           1500                                                                               
+ADAMS            1100                                                                               
+JAMES             950                                                                               
+FORD             3000                                                                               
+MILLER           1300                                                                               
+
+14 rows selected.
+
+SQL> --29. WAQTD NAME OF THE EMPLOYEE HAVING ATLEAST 2L's IN HIS NAME
+SQL> select ename from emp where ename like '%LL%';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+MILLER                                                                                              
+
+SQL> --30. WAQTD NAME OF THE EMPLOYEES WHOSE NAME STARTS WITH A `VOWEL'
+SQL> select ename from emp where ename like 'A%' and ename like 'E%' and ename like 'I%' and ename like 'O%' and ename like 'U%';
+
+no rows selected
+
+SQL> select ename from emp where ename like 'A%' or ename like 'E%' or ename like 'I%' or ename like 'O%' or ename like 'U%';
+
+ENAME                                                                                               
+----------                                                                                          
+ALLEN                                                                                               
+ADAMS                                                                                               
+
+SQL> spool off;
