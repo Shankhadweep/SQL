@@ -1,0 +1,96 @@
+SQL> --1.	WAQTD DNO AND NUMBER OF EMP WORKING IN EACH DEPT IF THERE ARE ATLEAST 2 CLERKS IN EACH DEPT
+SQL> select deptno,count(*) from emp where job in ('CLERK') group by deptno having count(*) > 2;
+
+no rows selected
+
+SQL> --2.	WAQTD DNO AND TOTAL SAALARYNEEDED TO PAY ALL EMP IN EACH DEPT IF THERE ARE ATLEAST 4 EMP IN EACH DEPT
+SQL> select deptno,sum(sal) from emp group by deptno having count(*) >= 4;
+
+    DEPTNO   SUM(SAL)                                                                               
+---------- ----------                                                                               
+        30       9400                                                                               
+        20      10875                                                                               
+
+SQL> --3.	WAQTD NUMBER OF EMP EARNING SAL MORE THAN 1200 IN EACH JOB AND THE TOTAL SAL NEEDED TO PAY EMP OF EACH JOB MUST EXCEES 3800
+SQL> select count(*) from emp where sal > 1200 group by job having sum(sal) > 3800;
+
+  COUNT(*)                                                                                          
+----------                                                                                          
+         4                                                                                          
+         1                                                                                          
+         3                                                                                          
+         2                                                                                          
+
+SQL> --4.	WAQTD DEPTNO AND NUMBER OF EMP WORKING ONLY IF THERE ARE 2 EMP WORKING IN EACH DEPT AS MANAGER .
+
+SQL> select deptno,count(*) from emp where job in ('MANAGER') group by deptno having count(*)=2;
+
+no rows selected
+
+SQL> --5.	WAQTD JOB AND MAX SAL OF EMP IN EACH JOB IF THE MAX SAL EXCEEDS 2600
+SQL> select job,max(sal) from emp group by job having max(sal) > 2600;
+
+JOB         MAX(SAL)                                                                                
+--------- ----------                                                                                
+PRESIDENT       5000                                                                                
+MANAGER         2975                                                                                
+ANALYST         3000                                                                                
+
+SQL> spool off;
+SQL> --6.	WAQTD THE SALARIES WHICH ARE REPEATED IN EMP TABLE
+SQL> select sal from emp group by sal having count(*) > 1;
+
+       SAL                                                                      
+----------                                                                      
+      1250                                                                      
+      3000                                                                      
+
+SQL> --7.	WAQTD THE HIREDATE WHICH ARE DUPLICATED IN EMP TABLE
+SQL> select hiredate from emp group by hiredate having count(*) > 1;
+
+HIREDATE                                                                        
+---------                                                                       
+03-DEC-81                                                                       
+
+SQL> --8.	WAQTD AVG SALARY OF EACH DEPT IF AVG SAL IS LESS THAN 3000
+SQL> select avg(sal) from emp group by deptno having avg(sal) < 3000;
+
+  AVG(SAL)                                                                      
+----------                                                                      
+1566.66667                                                                      
+      2175                                                                      
+2916.66667                                                                      
+
+SQL> select avg(sal),deptno from emp group by deptno having avg(sal) < 3000;
+
+  AVG(SAL)     DEPTNO                                                           
+---------- ----------                                                           
+1566.66667         30                                                           
+      2175         20                                                           
+2916.66667         10                                                           
+
+SQL> --9.	WAQTD DEPTNO IF THERE ARE ATLEAST 3 EMP IN EACH DEPT WHOS NAME HAS CHAR 'A' OR 'S' .
+SQL> select deptno from emp where ename like '%A%' and ename like '%S%' group by deptno having count(*) > 3;
+
+no rows selected
+
+
+
+SQL> --10.	WAQTD MIN AND MAX SALARIES OF EACH JOB IF MIN SAL IS MORE THAN 1000 AND MAX SAL IS LESS THAN 5000 .
+SQL> select min(sal),max(sal) from emp group by job having min(sal)>1000 and max(sal)<5000;
+
+  MIN(SAL)   MAX(SAL)                                                           
+---------- ----------                                                           
+      1250       1600                                                           
+      2450       2975                                                           
+      3000       3000                                                           
+
+SQL> select min(sal),max(sal),job from emp group by job having min(sal)>1000 and max(sal)<5000;
+
+  MIN(SAL)   MAX(SAL) JOB                                                       
+---------- ---------- ---------                                                 
+      1250       1600 SALESMAN                                                  
+      2450       2975 MANAGER                                                   
+      3000       3000 ANALYST                                                   
+
+SQL> spool off;
