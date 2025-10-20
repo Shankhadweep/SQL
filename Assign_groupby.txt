@@ -7,13 +7,6 @@ SQL> select count(*) from emp where job not in ('PRESIDENT') group by deptno;
          5                                                                      
          2                                                                      
 
-SQL> select count(*),job from emp where job not in ('PRESIDENT') group by deptno;
-select count(*),job from emp where job not in ('PRESIDENT') group by deptno
-                *
-ERROR at line 1:
-ORA-00979: not a GROUP BY expression 
-
-
 SQL> select count(*),deptno from emp where job not in ('PRESIDENT') group by deptno;
 
   COUNT(*)     DEPTNO                                                           
@@ -166,3 +159,4 @@ COUNT(SAL)
         14                                                                      
 
 SQL> spool off;
+
